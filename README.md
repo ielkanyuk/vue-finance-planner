@@ -1,5 +1,9 @@
 # vue-finance-planner
 
+## Available on
+
+https://vue-finance-planner.web.app/
+
 ## Project setup
 ```
 npm install
@@ -20,5 +24,3 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

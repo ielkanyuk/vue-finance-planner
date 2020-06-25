@@ -8,8 +8,31 @@ export default {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password);
       } catch (e) {
+        commit('setError', e);
         throw e;
       }
+    },
+    // eslint-disable-next-line
+    async register({ dispatch, commit }, { email, password, name }) {
+      // eslint-disable-next-line
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+        const uid = await dispatch('getUid');
+        await firebase.database().ref(`/users/${uid}/info`).set({
+          bill: 100000,
+          name,
+        });
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    getUid() {
+      const user = firebase.auth().currentUser;
+      return user ? user.uid : null;
+    },
+    async logout() {
+      await firebase.auth().signOut();
     },
   },
 };
